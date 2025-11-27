@@ -19,6 +19,7 @@
         <input type="text" name="name" value="{{ old('name') }}" placeholder="Product name">
         <input type="number" name="quantity" value="{{ old('quantity') }}" placeholder="Quantity">
         <textarea name="description" placeholder="Product description">{{ old('description') }}</textarea>
+         
         <input type="submit" value="Submit">
     </form>
 </x-layout>

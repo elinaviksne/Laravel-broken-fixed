@@ -72,19 +72,25 @@ class ProductController extends Controller
 
     }
 
-    public function decreaseQuantity(Request $request, Product $product) {
-        $request->validate([
-            'amount' => 'required|integer|min:1',
-        ]);
+   public function increase(Product $product)
+    {
+        $product->increaseQuantity();
 
-        if ($product->decreaseQuantity($request->amount)) {
-            return redirect()
-                    ->route('products.show', [$product])
-                    ->with('message', "Product quantity decreased successfully");
-        } else {
-            return redirect()
-                    ->route('products.show', [$product])
-                    ->withErrors(['amount' => 'Not enough stock to decrease quantity.']);
-        }
+        return response()->json([
+            'quantity' => $product->quantity,
+            'message' => 'Produkts palielināts par 1 vienību.'
+        ]);
     }
+
+
+    public function decrease(Product $product)
+    {
+        $product->decreaseQuantity();
+
+        return response()->json([
+            'quantity' => $product->quantity,
+            'message' => 'Produkts samazināts par 1 vienību.'
+        ]);
+    }
+
 }

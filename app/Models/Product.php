@@ -15,7 +15,24 @@ class Product extends Model
         'description',
     ];
 
-    public function tags(){
+    public function tags()
+    {
         return $this->belongsToMany(Tag::class, 'products_tag', 'products_id', 'tag_id');
     }
+  
+    public function increaseQuantity(int $amount = 1)
+    {
+        $this->quantity += $amount;
+        $this->save();
+    }
+
+    public function decreaseQuantity(int $amount = 1)
+    {
+        $this->quantity -= $amount;
+        if ($this->quantity < 0) {
+            $this->quantity = 0;
+        }
+        $this->save();
+    }
+  
 }

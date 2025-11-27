@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    
+
 
     <h1>{{ $product->name }}</h1>
     <h4>Quantity: <span id="product-quantity">{{ $product->quantity }}</span></h4>
@@ -30,5 +30,20 @@
         @csrf
         @method('DELETE')
         <input type="submit" value="Delete">
+    </form>
+
+
+    {{-- Tags section --}}
+    <h3>Tags</h3>
+    <ul id="tags-list">
+        @foreach($product->tags as $tag)
+            <li>{{ $tag->name }}</li>
+        @endforeach
+    </ul>
+
+    <form id="add-tag-form">
+        @csrf
+        <input type="text" name="tag_name" id="tag_name" placeholder="Add new tag">
+        <button type="submit">Add Tag</button>
     </form>
 </x-layout>

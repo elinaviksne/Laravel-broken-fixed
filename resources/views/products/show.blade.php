@@ -13,6 +13,8 @@
         </div>
     @endif
 
+    
+
     <h1>{{ $product->name }}</h1>
     <h4>Quantity: {{ $product->quantity }}</h4>
     <p>{{ $product->description }}</p>

@@ -15,6 +15,11 @@ class Product extends Model
         'description',
     ];
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'products_tag', 'products_id', 'tag_id');
+    }
+  
     public function increaseQuantity(int $amount = 1)
     {
         $this->quantity += $amount;
@@ -29,4 +34,5 @@ class Product extends Model
         }
         $this->save();
     }
+  
 }

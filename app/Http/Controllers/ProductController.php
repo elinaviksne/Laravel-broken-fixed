@@ -73,4 +73,18 @@ class ProductController extends Controller
                     ->withErrors(['amount' => 'Not enough stock to decrease quantity.']);
         }
     }
+
+    public function increaseQuantity(Request $request, Product $product) {
+    $request->validate([
+        'amount' => 'required|integer|min:1',
+    ]);
+
+    $product->quantity += $request->amount;
+    $product->save();
+
+    return redirect()
+            ->route('products.show', [$product])
+            ->with('message', "Product quantity increased successfully");
+}
+
 }

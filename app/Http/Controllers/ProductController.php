@@ -26,7 +26,7 @@ class ProductController extends Controller
         $product = Product::create($validated);
 
         return redirect()
-                ->route('products.show', [$product]) // vai ['product' => $product]
+                ->route('products.show', [$product]) 
                 ->with('message', "Product created successfully");
     }
 
@@ -57,17 +57,14 @@ class ProductController extends Controller
                 ->route('products.show', [$product])
                 ->with('message', "Product updated successfully");
 
-        // Handle tags from request
         $tags = json_decode($request->tags, true) ?? [];
         $tagIds = [];
 
         foreach ($tags as $tag) {
-            // Create new tag if it doesn't exist
             $t = Tag::firstOrCreate(['name' => $tag['name']]);
             $tagIds[] = $t->id;
         }
 
-        // Sync product's tags
         $product->tags()->sync($tagIds);
 
     }

@@ -14,4 +14,19 @@ class Product extends Model
         'quantity',
         'description',
     ];
+
+    public function increaseQuantity(int $amount = 1)
+    {
+        $this->quantity += $amount;
+        $this->save();
+    }
+
+    public function decreaseQuantity(int $amount = 1)
+    {
+        $this->quantity -= $amount;
+        if ($this->quantity < 0) {
+            $this->quantity = 0;
+        }
+        $this->save();
+    }
 }
